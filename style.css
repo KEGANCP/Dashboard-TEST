@@ -2,13 +2,13 @@
     background-image: url("Images/BANNER.png");
     background-size: cover;
     text-align: center;
-    color: rgb(255, 230, 191);
+    color: rgb(34, 57, 158);
     border-style:solid;
-    border-color:rgb(0, 255, 234);
+    border-color:rgb(26, 10, 48)
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 .well {
-    background-color: #f8ba5e !important; 
+    background-color: #472cdd  !important; 
     border-style:solid;
-    border-color:rgb(0, 255, 234);
+    border-color:rgb(173, 129, 231);
 }
