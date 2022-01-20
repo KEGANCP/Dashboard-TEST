@@ -2,149 +2,112 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Crime Predictions in Chicago</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>𝖧𝖾𝗋𝗍𝖿𝗈𝗋𝖽𝗌𝗁𝗂𝗋𝖾 𝖲𝗍𝗋𝖾𝖾𝗍 𝖢𝗋𝗂𝗆𝖾</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dc.min.css">
+    <link rel="stylesheet" href="css/spin.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <!-- Top bar with title, no need for navigation -->
+    <nav class="navbar sticky-top navbar-dark bg-crime">
+        <h1 class="navbar-brand mb-0">Street crime in Hertfordshire in 2018</h1>
+    </nav>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 jumbotron text-center";>
-        <h1></h1>
-        <p>Use the interactive charts below to explore the dataset</p>
-      </div>
-    </div>
-     <div class="row">
-      <div class="col-md-12">
-        <p>We have selected this topic to determine what correlation certain weather patterns have on violent crimes 
-          committed within Chicago. Our analysis could be useful for a wide range of purpose; from those seeking potential 
-          vacation travel to Chicago, to law enforcement better equipped to forecast violent crime within their precinct.
-          </p>
-      </div>
-    </div>    
-    <div class="container grid grid-hero-sidebar">
-      <div class="sidebar">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-           Cell Title
-           </div>
-        </div>
-      </div>
-        <div class="chart-stage">
-          <img data-src="holder.js/100px660?theme=white">
-        </div>
-        <div class="chart-notes">
-          Notes about this chart
-        </div>
-      </div>
-    
-    <div class="hero">
-      <div class="chart-wrapper">
-        <div class="chart-title">
-          Cell Title
-        </div>
-        <div class="chart-stage">
-          <img data-src="holder.js/100px240?theme=white">
-        </div>
-        <div class="chart-notes">
-          Notes about this chart
-        </div>
-      </div>
-    </div>
-    <div class="chart-wrapper">
-      <div class="chart-title">
-        Cell Title
-      </div>
-      <div class="chart-stage">
-        <img data-src="holder.js/100px120?theme=white">
-      </div>
-      <div class="chart-notes">
-        Notes about this chart
-      </div>
-    </div>
-    <div class="chart-wrapper">
-      <div class="chart-title">
-        Cell Title
-      </div>
-      <div class="chart-stage">
-        <img data-src="holder.js/100px120?theme=white">
-      </div>
-      <div class="chart-notes">
-        Notes about this chart
-      </div>
-    </div>
-    <div class="chart-wrapper">
-      <div class="chart-title">
-        Cell Title
-      </div>
-      <div class="chart-stage">
-        <img data-src="holder.js/100px120?theme=white">
-      </div>
-      <div class="chart-notes">
-        Notes about this chart
-      </div>
-    </div>
-    <div class="chart-wrapper">
-      <div class="chart-title">
-        Cell Title
-      </div>
-      <div class="chart-stage">
-        <img data-src="holder.js/100px120?theme=white">
-      </div>
-      <div class="chart-notes">
-        Notes about this chart
-      </div>
-    </div>
-    <div class="chart-wrapper">
-      <div class="chart-title">
-        Cell Title
-      </div>
-      <div class="chart-stage">
-        <img data-src="holder.js/100px120?theme=white">
-      </div>
-      <div class="chart-notes">
-        Notes about this chart
-      </div>
-    </div>
-    <div class="chart-wrapper">
-      <div class="chart-title">
-        Cell Title
-      </div>
-      <div class="chart-stage">
-        <img data-src="holder.js/100px120?theme=white">
-      </div>
-      <div class="chart-notes">
-        Notes about this chart
-      </div>
-    </div>
-  </div>
+    <main class="container-fluid">
+        <div class="row">
+            <!-- Left coloumn for month selection -->
+            <div class="col-sm-12 col-md-2 col-lg-2 left-bar">
+                <!-- Container for mont select menu -->
+                <div aria-label="Month Select Menu" id="monthSelect" class="text-white text-center left-bar-body">
+                    <h5>Select Month<br><small>(Ctrl + Click to select multiple)</small></h5>
+                </div>
+                <div class="text-center">
+                    <!-- Button to reset all charts to initial display -->
+                    <button class="btn btn-crime">
+                        <a href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a>
+                    </button>
+                </div>
+            </div>
 
-  <div class="container">
-    <p class="small text-muted">Built with &#9829; by <a href="https://keen.io">Keen IO</a></p>
-  </div>
+            <!-- Main section for all data rendering -->
+            <div class="col-sm-12 col-md-10 col-lg-10 main-body">
+                <div class="row">
+                    <!-- Number display of total crimes container -->
+                    <h3 id="totalCrime" class="text-dark">&nbsp;</h3>
 
-  <!-- Project Analytics -->
-  <script type="text/javascript" src="../../assets/js/keen-analytics.js"></script>
-  <script>
-    function toggleMenu() {
-      const toggleBtn = document.querySelector('.navbar-toggle');
+                    <!-- Data loader, displays when the data is taking its time loading! -->
+                    <div id="loader">
+                        <h4 class="loadText">Loading Data, One Moment...</h4>
+                    </div>
 
-      toggleBtn.addEventListener('click', (e) => {
-        let menu;
-        if (e.currentTarget.dataset.target) {
-          menu = document.querySelector(e.currentTarget.dataset.target);
-        }
-        if (menu) menu.classList.toggle('collapsed');
-      });
-    }
+                    <!-- Bootstrap elements for displaying map -->
+                    <div class="col-sm-12">
+                        <div class="card" id="one">
+                            <h5 class="card-header text-white bg-crime-second">
+                                Crime Map <small>(Click on a region for refined info)</small>
+                            </h5>
 
-    window.addEventListener('DOMContentLoaded', toggleMenu);
-  </script>
+                            <div class="card-body bg-light">
+                                <div id="crimeMap" class="card-img-top">
+                                    <div class="mapLegend">
+                                        <span class="hi">High</span>
+                                        <span class="lo">Low</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bootstrap elements for displaying pie chart -->
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                        <div class="card" id="two">
+                            <h5 class="card-header text-white bg-crime-second">Type of crime</h5>
+                            <div class="card-body bg-light">
+                                <div id="crimeType" class="card-img-top"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bootstrap elements for displaying bar chart -->
+                    <div class="col-sm-12 col-md-6 col-xl-4">
+                        <div class="card" id="three">
+                            <h5 class="card-header text-white bg-crime-second">Month total</h5>
+                            <div class="card-body bg-light">
+                                <div id="monthTotal" class="card-img-top"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bootstrap elements for displaying row chart -->
+                    <div class="col-sm-12 col-md-12 col-xl-4">
+                        <div class="card" id="four">
+                            <h5 class="card-header text-white bg-crime-second">Outcome of Crime</h5>
+                            <div class="card-body bg-light">
+                                <div id="crimeOutcome" class="card-img-top"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="scripts/spin.js"></script>
+    <script src="scripts/d3.min.js"></script>
+    <script src="scripts/crossfilter.min.js"></script>
+    <script src="scripts/dc.min.js"></script>
+    <script src="scripts/queue.min.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="scripts/main.js"></script>
+
 </body>
 
 </html>
